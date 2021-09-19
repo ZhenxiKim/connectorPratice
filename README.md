@@ -1,0 +1,2 @@
+# connectorPratice
+Kafka Connector Pratice
