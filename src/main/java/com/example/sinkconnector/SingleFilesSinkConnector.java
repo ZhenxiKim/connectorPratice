@@ -1,18 +1,21 @@
-package com.example;
+package com.example.sinkconnector;
 
+import com.example.sourceconnector.SimpleFileSourceConnectorConfig;
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.common.config.ConfigException;
 import org.apache.kafka.connect.connector.Task;
 import org.apache.kafka.connect.errors.ConnectException;
-import org.apache.kafka.connect.source.SourceConnector;
+import org.apache.kafka.connect.sink.SinkConnector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleFileSourceConnector extends SourceConnector {
-
+/*
+* SinkConnector : 태스크 실행 전에 사용자로부터 설정값 입력받아 초기화 및 사용할 태스크 선택
+* */
+public class SingleFilesSinkConnector extends SinkConnector {
     private Map<String,String> configProperties;
 
     @Override
@@ -33,8 +36,7 @@ public class SimpleFileSourceConnector extends SourceConnector {
 
     @Override
     public Class<? extends Task> taskClass() {
-        //사용할 태스크의클래스이름 지정
-        return SimpleFileSourceTask.class;
+        return SingleFilesSinkTask.class;
     }
 
     @Override
@@ -57,6 +59,7 @@ public class SimpleFileSourceConnector extends SourceConnector {
     @Override
     public ConfigDef config() {
         //커넥터에서 사용할 설정값 지정
-        return SimpleFileSourceConnectorConfig.CONFIG;
+        return SingleFilesSinkConnectorConfig.CONFIG;
     }
+
 }
